@@ -7,29 +7,29 @@ export function endOfMonth(date: Date): Date {
 }
 
 export function startOfWeek(date: Date): Date {
-  const d = new Date(date);
-  const day = d.getDay();
+  let d = new Date(date);
+  let day = d.getDay();
   // Convert Sunday (0) to 7 to make Monday (1) the start of the week
-  const adjustedDay = day === 0 ? 7 : day;
+  let adjustedDay = day === 0 ? 7 : day;
   d.setDate(d.getDate() - (adjustedDay - 1));
   return d;
 }
 
 export function endOfWeek(date: Date): Date {
-  const d = new Date(date);
-  const day = d.getDay();
+  let d = new Date(date);
+  let day = d.getDay();
   // Convert Sunday (0) to 7 to make Monday (1) the start of the week
-  const adjustedDay = day === 0 ? 7 : day;
+  let adjustedDay = day === 0 ? 7 : day;
   d.setDate(d.getDate() + (7 - adjustedDay));
   return d;
 }
 
 export function daysInWeek(date: Date): Date[] {
-  const d = new Date(date);
-  const days: Date[] = [];
-  const day = d.getDay();
+  let d = new Date(date);
+  let days: Date[] = [];
+  let day = d.getDay();
   // Convert Sunday (0) to 7 to make Monday (1) the start of the week
-  const adjustedDay = day === 0 ? 7 : day;
+  let adjustedDay = day === 0 ? 7 : day;
   d.setDate(d.getDate() - (adjustedDay - 1));
 
   for (let i = 0; i < 7; i++) {
@@ -41,14 +41,14 @@ export function daysInWeek(date: Date): Date[] {
 }
 
 export function weeksInMonth(date: Date): Date[][] {
-  const weeks: Date[][] = [];
-  const monthStart = startOfMonth(date);
-  const monthEnd = endOfMonth(date);
+  let weeks: Date[][] = [];
+  let monthStart = startOfMonth(date);
+  let monthEnd = endOfMonth(date);
   let currentWeekStart = startOfWeek(monthStart);
 
   while (currentWeekStart <= monthEnd) {
     weeks.push(daysInWeek(currentWeekStart));
-    const nextWeekStart = new Date(currentWeekStart);
+    let nextWeekStart = new Date(currentWeekStart);
     nextWeekStart.setDate(nextWeekStart.getDate() + 7);
     currentWeekStart = nextWeekStart;
   }
@@ -69,4 +69,20 @@ export function nextMonth(date: Date): Date {
 
 export function previousMonth(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth() - 1, 1);
+}
+
+export function previousDay(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
+}
+
+export function nextDay(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+}
+
+export function previousWeek(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7);
+}
+
+export function nextWeek(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
 }

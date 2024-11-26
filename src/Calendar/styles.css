@@ -1,0 +1,14 @@
+.calendar-Heading {
+    display: flex;
+}
+
+.calendar-Day {
+    width: 32px;
+    height: 32px;
+    text-align: center;
+}
+
+.calendar-Day[data-focused="true"] {
+    background-color: orangered;
+    color: white;
+}

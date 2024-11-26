@@ -1,4 +1,4 @@
-export function toFullDate(date: Date): string {
+export function toAriaLabel(date: Date): string {
   // undefined uses the browser's default locale
   return new Intl.DateTimeFormat(undefined, {
     dateStyle: "full",
