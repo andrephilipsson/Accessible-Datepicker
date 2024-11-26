@@ -3,8 +3,9 @@
   "manifest": {
     "version": 1,
     "install": {
-      "bun": {
-        "pkg-path": "bun"
+      "nodejs": {
+        "pkg-path": "nodejs",
+        "version": "^20.15.1"
       }
     },
     "hook": {},
@@ -24,116 +25,124 @@
   },
   "packages": [
     {
-      "attr_path": "bun",
+      "attr_path": "nodejs",
       "broken": false,
-      "derivation": "/nix/store/ak82da1immnc8cbwmq553pb0sh1q3djr-bun-1.1.31.drv",
-      "description": "Incredibly fast JavaScript runtime, bundler, transpiler and package manager – all in one",
-      "install_id": "bun",
-      "license": "[ MIT, LGPL-2.1-only ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
-      "name": "bun-1.1.31",
-      "pname": "bun",
-      "rev": "76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
-      "rev_count": 705705,
-      "rev_date": "2024-11-09T08:06:34Z",
-      "scrape_date": "2024-11-11T03:57:18Z",
+      "derivation": "/nix/store/v0v7dny82f4hmfp9s8zj31iykjrdblkn-nodejs-20.18.0.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "name": "nodejs-20.18.0",
+      "pname": "nodejs",
+      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "rev_count": 710087,
+      "rev_date": "2024-11-19T11:04:08Z",
+      "scrape_date": "2024-11-21T04:00:36Z",
       "stabilities": [
+        "staging",
         "unstable"
       ],
       "unfree": false,
-      "version": "1.1.31",
+      "version": "20.18.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/gmvlpnhc673pjwai7q0ydvikif8r1gg5-bun-1.1.31"
+        "libv8": "/nix/store/hfchgw1as9fm02wcyr3iqya05ylll5f3-nodejs-20.18.0-libv8",
+        "out": "/nix/store/9grahx8677nlgbx3yfiggibw335lkgfr-nodejs-20.18.0"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "bun",
+      "attr_path": "nodejs",
       "broken": false,
-      "derivation": "/nix/store/zwq8p3si3f5lhz3gb2nd4dkc8lc2vkxa-bun-1.1.31.drv",
-      "description": "Incredibly fast JavaScript runtime, bundler, transpiler and package manager – all in one",
-      "install_id": "bun",
-      "license": "[ MIT, LGPL-2.1-only ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
-      "name": "bun-1.1.31",
-      "pname": "bun",
-      "rev": "76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
-      "rev_count": 705705,
-      "rev_date": "2024-11-09T08:06:34Z",
-      "scrape_date": "2024-11-11T03:57:18Z",
+      "derivation": "/nix/store/d3mn4dx774ppvnajxls24jkgsscv4sq5-nodejs-20.18.0.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "name": "nodejs-20.18.0",
+      "pname": "nodejs",
+      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "rev_count": 710087,
+      "rev_date": "2024-11-19T11:04:08Z",
+      "scrape_date": "2024-11-21T04:00:36Z",
       "stabilities": [
+        "staging",
         "unstable"
       ],
       "unfree": false,
-      "version": "1.1.31",
+      "version": "20.18.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/4xbdp3yb549g0c50qjb2majdg3b484i1-bun-1.1.31"
+        "libv8": "/nix/store/yajvza262cb3bri9cryfrgpm3pvc066n-nodejs-20.18.0-libv8",
+        "out": "/nix/store/hsh74yzdb9yk834w9j5qz0w3sw84wcfv-nodejs-20.18.0"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "bun",
+      "attr_path": "nodejs",
       "broken": false,
-      "derivation": "/nix/store/zw67yla9pcfv8yvnlkvgjsb8mi2nwav4-bun-1.1.31.drv",
-      "description": "Incredibly fast JavaScript runtime, bundler, transpiler and package manager – all in one",
-      "install_id": "bun",
-      "license": "[ MIT, LGPL-2.1-only ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
-      "name": "bun-1.1.31",
-      "pname": "bun",
-      "rev": "76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
-      "rev_count": 705705,
-      "rev_date": "2024-11-09T08:06:34Z",
-      "scrape_date": "2024-11-11T03:57:18Z",
+      "derivation": "/nix/store/lmn1hdq8i3gf5d3r64l13nhanlb2pnx5-nodejs-20.18.0.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "name": "nodejs-20.18.0",
+      "pname": "nodejs",
+      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "rev_count": 710087,
+      "rev_date": "2024-11-19T11:04:08Z",
+      "scrape_date": "2024-11-21T04:00:36Z",
       "stabilities": [
+        "staging",
         "unstable"
       ],
       "unfree": false,
-      "version": "1.1.31",
+      "version": "20.18.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/rvf4znnp3zy53f6wc8wkccrz3n59l552-bun-1.1.31"
+        "libv8": "/nix/store/93xdzgjsm1dnnw33lnba4i7h7k5yph4k-nodejs-20.18.0-libv8",
+        "out": "/nix/store/v8p36abnvrn9i5h41zkgrayaj7sclv6z-nodejs-20.18.0"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
       "priority": 5
     },
     {
-      "attr_path": "bun",
+      "attr_path": "nodejs",
       "broken": false,
-      "derivation": "/nix/store/q0kccm3zsag6cwfb9f9mq0x15z7i59jj-bun-1.1.31.drv",
-      "description": "Incredibly fast JavaScript runtime, bundler, transpiler and package manager – all in one",
-      "install_id": "bun",
-      "license": "[ MIT, LGPL-2.1-only ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
-      "name": "bun-1.1.31",
-      "pname": "bun",
-      "rev": "76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
-      "rev_count": 705705,
-      "rev_date": "2024-11-09T08:06:34Z",
-      "scrape_date": "2024-11-11T03:57:18Z",
+      "derivation": "/nix/store/l136ajs6lg3mic58rnb7cdwhfhl3qcyr-nodejs-20.18.0.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "name": "nodejs-20.18.0",
+      "pname": "nodejs",
+      "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
+      "rev_count": 710087,
+      "rev_date": "2024-11-19T11:04:08Z",
+      "scrape_date": "2024-11-21T04:00:36Z",
       "stabilities": [
+        "staging",
         "unstable"
       ],
       "unfree": false,
-      "version": "1.1.31",
+      "version": "20.18.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/gimbmhysr6l7fbzk25alznv0mphiy97a-bun-1.1.31"
+        "libv8": "/nix/store/czcxwki3zqih2pf355zk0vxbmrij2bzx-nodejs-20.18.0-libv8",
+        "out": "/nix/store/z0ivg3dbal4sk5h0c7p1pfkxc7ff98ri-nodejs-20.18.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",

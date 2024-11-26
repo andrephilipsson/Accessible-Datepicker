@@ -9,9 +9,7 @@ version = 1
 # List packages you wish to install in your environment inside
 # the `[install]` section.
 [install]
-bun.pkg-path = "bun"
-# hello.pkg-path = "hello"
-# nodejs = { version = "^20.15.1", pkg-path = "nodejs" }
+nodejs = { version = "^20.15.1", pkg-path = "nodejs" }
 
 # Set environment variables in the `[vars]` section. These variables may not
 # reference one another, and are added to the environment without first
