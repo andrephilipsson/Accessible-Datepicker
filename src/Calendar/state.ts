@@ -7,6 +7,8 @@ import {
   previousDay,
   previousMonth,
   previousWeek,
+  sameDayInNextMonth,
+  sameDayInPreviousMonth,
 } from "./date";
 
 export function useCalendarState() {
@@ -100,6 +102,15 @@ export function useCalendarState() {
     navigateNextMonth() {
       setCurrentMonth((month) => nextMonth(month));
     },
+    isSelected(date: Date) {
+      if (!value) return false;
+
+      return (
+        date.getFullYear() === value.getFullYear() &&
+        date.getMonth() === value.getMonth() &&
+        date.getDate() === value.getDate()
+      );
+    },
     isFocused(date: Date) {
       if (!focusedDate) return false;
 
@@ -137,6 +148,20 @@ export function useCalendarState() {
           e.preventDefault();
           e.stopPropagation();
           focusNextWeek();
+          break;
+        case "PageUp":
+          e.preventDefault();
+          e.stopPropagation();
+          setCurrentMonth((month) => previousMonth(month));
+          setFocusedDate((date) =>
+            sameDayInPreviousMonth(date || currentMonth),
+          );
+          break;
+        case "PageDown":
+          e.preventDefault();
+          e.stopPropagation();
+          setCurrentMonth((month) => nextMonth(month));
+          setFocusedDate((date) => sameDayInNextMonth(date || currentMonth));
           break;
         case "Enter":
         case " ":

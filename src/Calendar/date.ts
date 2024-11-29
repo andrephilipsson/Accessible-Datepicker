@@ -86,3 +86,17 @@ export function previousWeek(date: Date): Date {
 export function nextWeek(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
 }
+
+export function sameDayInPreviousMonth(date: Date): Date {
+  let prevMonth = previousMonth(date);
+  let daysInPrevMonth = endOfMonth(prevMonth).getDate();
+  let targetDay = Math.min(date.getDate(), daysInPrevMonth);
+  return new Date(prevMonth.getFullYear(), prevMonth.getMonth(), targetDay);
+}
+
+export function sameDayInNextMonth(date: Date): Date {
+  let nextMon = nextMonth(date);
+  let daysInNextMonth = endOfMonth(nextMon).getDate();
+  let targetDay = Math.min(date.getDate(), daysInNextMonth);
+  return new Date(nextMon.getFullYear(), nextMon.getMonth(), targetDay);
+}
