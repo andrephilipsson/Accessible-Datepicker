@@ -143,6 +143,7 @@ function DayCell({ state, day }: { state: CalendarState; day: Date }) {
         state.setFocusedDate(day);
         state.setValue(day);
       }}
+      onFocus={() => state.setFocusedDate(day)}
       data-focused={state.isFocused(day)}
       data-selected={state.isSelected(day)}
     >
