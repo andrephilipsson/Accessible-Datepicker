@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  endOfMonth,
   isSameMonth,
   nextDay,
   nextMonth,
@@ -9,6 +10,7 @@ import {
   previousWeek,
   sameDayInNextMonth,
   sameDayInPreviousMonth,
+  startOfMonth,
 } from "./date";
 
 export function useCalendarState() {
@@ -162,6 +164,16 @@ export function useCalendarState() {
           e.stopPropagation();
           setCurrentMonth((month) => nextMonth(month));
           setFocusedDate((date) => sameDayInNextMonth(date || currentMonth));
+          break;
+        case "Home":
+          e.preventDefault();
+          e.stopPropagation();
+          setFocusedDate(startOfMonth(currentMonth));
+          break;
+        case "End":
+          e.preventDefault();
+          e.stopPropagation();
+          setFocusedDate(endOfMonth(currentMonth));
           break;
         case "Enter":
         case " ":

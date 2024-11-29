@@ -75,6 +75,7 @@ export function Calendar() {
           </svg>
         </button>
       </div>
+
       <table
         role="grid"
         aria-label={state.current.toLocaleString("default", {
@@ -146,6 +147,7 @@ function DayCell({ state, day }: { state: CalendarState; day: Date }) {
       onFocus={() => state.setFocusedDate(day)}
       data-focused={state.isFocused(day)}
       data-selected={state.isSelected(day)}
+      aria-selected={state.isSelected(day)}
     >
       <span
         ref={ref}
