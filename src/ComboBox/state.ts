@@ -1,0 +1,1 @@
+// håll koll på om kalendern är öppen eller ej
