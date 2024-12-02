@@ -52,7 +52,7 @@ export function Calendar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              aria-label="Previous" // TODO: Localize
+              aria-label="Previous month" // TODO: Localize
               focusable="false"
               role="img"
             >
@@ -79,7 +79,7 @@ export function Calendar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              aria-label="Next" // TODO: Localize
+              aria-label="Next month" // TODO: Localize
               focusable="false"
               role="img"
             >
@@ -132,7 +132,7 @@ export function Calendar() {
 
         <div className="calendar-Hidden">
           <button
-            aria-label="Next"
+            aria-label="Next month"
             tabIndex={-1}
             onClick={state.navigateNextMonth}
           ></button>
