@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isSameMonth, isToday, weeksInMonth } from "./date";
 import { CalendarState, useCalendarState } from "./state";
 import "./styles.css";
@@ -174,6 +174,7 @@ function DayCell({ state, day }: { state: CalendarState; day: Date }) {
           toAriaLabel(day) + (state.isSelected(day) ? " selected" : "")
         }
         tabIndex={state.dateTabIndex(day)}
+        onContextMenu={(event) => event.preventDefault()}
       >
         {day.getDate()}
       </span>
