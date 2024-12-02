@@ -158,7 +158,7 @@ function DayCell({ state, day }: { state: CalendarState; day: Date }) {
       className="calendar-Day"
       key={day.toString()}
       onClick={() => {
-        state.setFocusedDate(day);
+        state.setInternalFocus(day);
         state.setValue(day);
       }}
       onFocus={() => state.setFocusedDate(day)}

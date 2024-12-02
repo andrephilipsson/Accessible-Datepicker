@@ -3,7 +3,6 @@ import {
   endOfMonth,
   isSameDay,
   isSameMonth,
-  isToday,
   nextDay,
   nextMonth,
   nextWeek,
@@ -13,14 +12,29 @@ import {
   sameDayInNextMonth,
   sameDayInPreviousMonth,
   startOfMonth,
-  today,
 } from "./date";
 import { toAriaLabel } from "./utils";
 
 export function useCalendarState() {
   let [currentMonth, setCurrentMonth] = useState<Date>(new Date()); // The first day of the month that is currently displayed
   let [value, setValue] = useState<Date | null>(null); // The currently selected date
-  let [focusedDate, setFocusedDate] = useState<Date | null>(null); // The date that currently has focus
+  let [focusedDate, _setFocusedDate] = useState<Date | null>(null); // The date that currently has focus
+  let [internalFocus, setInternalFocus] = useState<Date>(new Date());
+
+  function setFocusedDate(
+    date: Date | null | ((prev: Date | null) => Date | null),
+  ) {
+    if (typeof date === "function") {
+      _setFocusedDate((prev) => {
+        let newDate = date(prev);
+        if (newDate) setInternalFocus(newDate);
+        return newDate;
+      });
+      return;
+    }
+    _setFocusedDate(date);
+    if (date) setInternalFocus(date);
+  }
 
   function announce(
     message: string,
@@ -126,8 +140,10 @@ export function useCalendarState() {
     value,
     setValue: _setValue,
     current: currentMonth,
+    setInternalFocus,
     navigatePreviousMonth() {
       setCurrentMonth((month) => previousMonth(month));
+      setInternalFocus((date) => sameDayInPreviousMonth(date));
 
       announce(
         new Intl.DateTimeFormat(undefined, {
@@ -139,6 +155,7 @@ export function useCalendarState() {
     },
     navigateNextMonth() {
       setCurrentMonth((month) => nextMonth(month));
+      setInternalFocus((date) => sameDayInNextMonth(date));
 
       announce(
         new Intl.DateTimeFormat(undefined, {
@@ -167,15 +184,10 @@ export function useCalendarState() {
       );
     },
     dateTabIndex(date: Date) {
-      if (focusedDate && isSameDay(date, focusedDate)) return 0;
-      if (isToday(date)) return 0;
-      if (
-        !isSameMonth(today(), currentMonth) &&
-        isSameDay(date, startOfMonth(currentMonth))
-      )
-        return 0;
-
-      return -1;
+      return isSameDay(date, internalFocus) ? 0 : -1;
+    },
+    isInternalFocus(date: Date) {
+      return isSameDay(date, internalFocus);
     },
     setFocusedDate,
     focusPreviousDay,
