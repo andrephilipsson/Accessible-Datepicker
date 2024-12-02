@@ -130,7 +130,7 @@ export function Calendar() {
           </tbody>
         </table>
 
-        <div className="">
+        <div className="calendar-Hidden">
           <button
             aria-label="Next"
             tabIndex={-1}
