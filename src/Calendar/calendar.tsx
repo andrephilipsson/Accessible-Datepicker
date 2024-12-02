@@ -134,7 +134,7 @@ export function Calendar() {
           <button
             aria-label="Next"
             tabIndex={-1}
-            onClick={state.focusNextMonth}
+            onClick={state.navigateNextMonth}
           ></button>
         </div>
       </div>

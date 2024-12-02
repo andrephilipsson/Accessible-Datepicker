@@ -19,8 +19,14 @@ export function useCalendarState() {
   let [value, setValue] = useState<Date | null>(null); // The currently selected date
   let [focusedDate, setFocusedDate] = useState<Date | null>(null); // The date that currently has focus
 
-  function announce(message: string) {
-    let liveMessage = document.getElementById("live-polite") as HTMLDivElement;
+  function announce(
+    message: string,
+    ariaLive: "assertive" | "polite" = "polite",
+    timeout: number = 7000,
+  ) {
+    let liveMessage = document.getElementById(
+      `live-${ariaLive}`,
+    ) as HTMLDivElement;
 
     let node = document.createElement("div");
     node.textContent = message;
@@ -28,7 +34,7 @@ export function useCalendarState() {
 
     setTimeout(() => {
       liveMessage.removeChild(node);
-    }, 4000);
+    }, timeout);
   }
 
   function focusPreviousDay() {
@@ -107,15 +113,10 @@ export function useCalendarState() {
     setFocusedDate(newDate);
   }
 
-  function focusNextMonth() {
-    setCurrentMonth(nextMonth(currentMonth));
-    setFocusedDate(startOfMonth(nextMonth(currentMonth)));
-  }
-
   function _setValue(date: Date | null) {
     setValue(date);
 
-    if (date) announce(`Selected: ${toAriaLabel(date)}`);
+    if (date) announce(`Selected: ${toAriaLabel(date)}`, "polite", 4000);
   }
 
   return {
@@ -124,9 +125,25 @@ export function useCalendarState() {
     current: currentMonth,
     navigatePreviousMonth() {
       setCurrentMonth((month) => previousMonth(month));
+
+      announce(
+        new Intl.DateTimeFormat(undefined, {
+          month: "long",
+          year: "numeric",
+        }).format(previousMonth(currentMonth)),
+        "assertive",
+      );
     },
     navigateNextMonth() {
       setCurrentMonth((month) => nextMonth(month));
+
+      announce(
+        new Intl.DateTimeFormat(undefined, {
+          month: "long",
+          year: "numeric",
+        }).format(nextMonth(currentMonth)),
+        "assertive",
+      );
     },
     isSelected(date: Date) {
       if (!value) return false;
@@ -151,7 +168,6 @@ export function useCalendarState() {
     focusNextDay,
     focusPreviousWeek,
     focusNextWeek,
-    focusNextMonth,
     handleKeys(e: React.KeyboardEvent) {
       switch (e.key) {
         case "ArrowLeft":
