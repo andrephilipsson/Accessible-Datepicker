@@ -12,11 +12,24 @@ import {
   sameDayInPreviousMonth,
   startOfMonth,
 } from "./date";
+import { toAriaLabel } from "./utils";
 
 export function useCalendarState() {
   let [currentMonth, setCurrentMonth] = useState<Date>(new Date()); // The first day of the month that is currently displayed
   let [value, setValue] = useState<Date | null>(null); // The currently selected date
   let [focusedDate, setFocusedDate] = useState<Date | null>(null); // The date that currently has focus
+
+  function announce(message: string) {
+    let liveMessage = document.getElementById("live-polite") as HTMLDivElement;
+
+    let node = document.createElement("div");
+    node.textContent = message;
+    liveMessage.appendChild(node);
+
+    setTimeout(() => {
+      liveMessage.removeChild(node);
+    }, 4000);
+  }
 
   function focusPreviousDay() {
     if (!focusedDate) {
@@ -94,9 +107,20 @@ export function useCalendarState() {
     setFocusedDate(newDate);
   }
 
+  function focusNextMonth() {
+    setCurrentMonth(nextMonth(currentMonth));
+    setFocusedDate(startOfMonth(nextMonth(currentMonth)));
+  }
+
+  function _setValue(date: Date | null) {
+    setValue(date);
+
+    if (date) announce(`Selected: ${toAriaLabel(date)}`);
+  }
+
   return {
     value,
-    setValue,
+    setValue: _setValue,
     current: currentMonth,
     navigatePreviousMonth() {
       setCurrentMonth((month) => previousMonth(month));
@@ -122,13 +146,12 @@ export function useCalendarState() {
         date.getDate() === focusedDate.getDate()
       );
     },
-    setFocusedDate(date: Date) {
-      setFocusedDate(date);
-    },
+    setFocusedDate,
     focusPreviousDay,
     focusNextDay,
     focusPreviousWeek,
     focusNextWeek,
+    focusNextMonth,
     handleKeys(e: React.KeyboardEvent) {
       switch (e.key) {
         case "ArrowLeft":
@@ -179,7 +202,7 @@ export function useCalendarState() {
         case " ":
           e.preventDefault();
           e.stopPropagation();
-          setValue(focusedDate);
+          _setValue(focusedDate);
           break;
       }
     },
