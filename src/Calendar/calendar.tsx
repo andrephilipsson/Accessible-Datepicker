@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import { isSameMonth, isToday, weeksInMonth } from "./date";
+import { useEffect, useRef } from "react";
+import { isSameMonth, isToday } from "./date";
 import { CalendarState, useCalendarState } from "./state";
 import "./styles.css";
 import { toAriaLabel } from "./utils";
 
 export function Calendar() {
   let state = useCalendarState();
-
-  let weeks = weeksInMonth(state.current);
 
   return (
     <>
@@ -104,7 +102,7 @@ export function Calendar() {
         >
           <thead aria-hidden="true">
             <tr>
-              {weeks[0].map((day, idx) => (
+              {state.weeks[0].map((day, idx) => (
                 <th key={idx} className="calendar-Weekday">
                   <span>
                     {day.toLocaleString(undefined, {
@@ -116,7 +114,7 @@ export function Calendar() {
             </tr>
           </thead>
           <tbody onBlur={() => state.setFocusedDate(null)}>
-            {weeks.map((week, idx) => (
+            {state.weeks.map((week, idx) => (
               <tr key={idx}>
                 {week.map((day) =>
                   isSameMonth(state.current, day) ? (

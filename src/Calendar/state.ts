@@ -12,6 +12,7 @@ import {
   sameDayInNextMonth,
   sameDayInPreviousMonth,
   startOfMonth,
+  weeksInMonth,
 } from "./date";
 import { toAriaLabel } from "./utils";
 
@@ -20,6 +21,7 @@ export function useCalendarState() {
   let [value, setValue] = useState<Date | null>(null); // The currently selected date
   let [focusedDate, _setFocusedDate] = useState<Date | null>(null); // The date that currently has focus
   let [internalFocus, setInternalFocus] = useState<Date>(new Date());
+  let weeks = weeksInMonth(currentMonth);
 
   function setFocusedDate(
     date: Date | null | ((prev: Date | null) => Date | null),
@@ -194,6 +196,7 @@ export function useCalendarState() {
     focusNextDay,
     focusPreviousWeek,
     focusNextWeek,
+    weeks,
     handleKeys(e: React.KeyboardEvent) {
       switch (e.key) {
         case "ArrowLeft":
