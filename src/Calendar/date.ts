@@ -100,3 +100,24 @@ export function sameDayInNextMonth(date: Date): Date {
   let targetDay = Math.min(date.getDate(), daysInNextMonth);
   return new Date(nextMon.getFullYear(), nextMon.getMonth(), targetDay);
 }
+
+export function isToday(date: Date): boolean {
+  let today = new Date();
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
+}
+
+export function isSameDay(date1: Date, date2: Date): boolean {
+  return (
+    date1.getDate() === date2.getDate() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getFullYear() === date2.getFullYear()
+  );
+}
+
+export function today(): Date {
+  return new Date();
+}

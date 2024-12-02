@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { isSameMonth, weeksInMonth } from "./date";
+import { isSameMonth, isToday, weeksInMonth } from "./date";
 import { CalendarState, useCalendarState } from "./state";
 import "./styles.css";
 import { toAriaLabel } from "./utils";
@@ -165,6 +165,7 @@ function DayCell({ state, day }: { state: CalendarState; day: Date }) {
       data-focused={state.isFocused(day)}
       data-selected={state.isSelected(day)}
       aria-selected={state.isSelected(day)}
+      data-today={isToday(day)}
     >
       <span
         ref={ref}
@@ -172,7 +173,7 @@ function DayCell({ state, day }: { state: CalendarState; day: Date }) {
         aria-label={
           toAriaLabel(day) + (state.isSelected(day) ? " selected" : "")
         }
-        tabIndex={state.isFocused(day) ? 0 : -1}
+        tabIndex={state.dateTabIndex(day)}
       >
         {day.getDate()}
       </span>

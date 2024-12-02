@@ -82,6 +82,10 @@
     color: var(--white);
 }
 
+.calendar-Day[data-today="true"] {
+    background-color: var(--zinc-300);
+}
+
 .calendar-NavigationButton {
     width: 32px;
     height: 32px;

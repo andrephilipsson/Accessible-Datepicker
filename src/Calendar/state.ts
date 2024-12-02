@@ -1,7 +1,9 @@
 import { useState } from "react";
 import {
   endOfMonth,
+  isSameDay,
   isSameMonth,
+  isToday,
   nextDay,
   nextMonth,
   nextWeek,
@@ -11,6 +13,7 @@ import {
   sameDayInNextMonth,
   sameDayInPreviousMonth,
   startOfMonth,
+  today,
 } from "./date";
 import { toAriaLabel } from "./utils";
 
@@ -162,6 +165,17 @@ export function useCalendarState() {
         date.getMonth() === focusedDate.getMonth() &&
         date.getDate() === focusedDate.getDate()
       );
+    },
+    dateTabIndex(date: Date) {
+      if (focusedDate && isSameDay(date, focusedDate)) return 0;
+      if (isToday(date)) return 0;
+      if (
+        !isSameMonth(today(), currentMonth) &&
+        isSameDay(date, startOfMonth(currentMonth))
+      )
+        return 0;
+
+      return -1;
     },
     setFocusedDate,
     focusPreviousDay,
