@@ -1,6 +1,7 @@
 // skicka med onSelect = date som props till Calendar
 import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
+import { useOutsideClick } from './state';
 
 export default function DatePicker() {
     const [isOpen, setOpen] = useState(false);
@@ -10,7 +11,7 @@ export default function DatePicker() {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     const [date, setDate] = useState(today);
 
-    const popupRef = useRef<HTMLDivElement | null>(null);
+    const popupRef = useOutsideClick(() => setOpen(false));
 
     // function handleClick() {
     //     setOpen(true);
