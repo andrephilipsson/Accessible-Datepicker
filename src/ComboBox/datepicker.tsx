@@ -1,21 +1,24 @@
 // skicka med onSelect = date som props till Calendar
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Calendar } from "../Calendar";
 import { useOutsideClick } from './state';
 
 export default function DatePicker() {
     const [isOpen, setOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-
     const today = thisDay();
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     const [date, setDate] = useState(today);
-
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     const popupRef = useOutsideClick(() => setOpen(false));
 
-    // function handleClick() {
-    //     setOpen(true);
-    // }
+    function handleKeyPress(e: React.KeyboardEvent) {
+        if (e.key === 'Enter' && dateRegex.test(date)) {
+            e.preventDefault();
+            e.stopPropagation();
+            //onDateSelect(date);
+            setOpen(true);
+        }
+    }
 
     function toggleCalendar() {
         setOpen((prev) => !prev);
@@ -41,7 +44,7 @@ export default function DatePicker() {
                 value={date}
                 placeholder={today}
                 onChange={handleChange}
-                //onClick={handleClick}
+                onKeyDown={handleKeyPress}
                 aria-haspopup="true"
                 aria-expanded={isOpen}
                 aria-invalid={!!errorMessage}
@@ -78,6 +81,7 @@ export default function DatePicker() {
                     }}
                 >
                     <Calendar />
+                    {/* <Calendar onChange={onDateSelect} /> */}
                 </div>)}
         </>
     )
