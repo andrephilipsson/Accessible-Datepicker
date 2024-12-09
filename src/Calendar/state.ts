@@ -15,12 +15,14 @@ import {
   weeksInMonth,
 } from "../date";
 import { toAriaLabel } from "./utils";
+import { CalendarProps } from "./types";
 
-export function useCalendarState() {
-  let [currentMonth, setCurrentMonth] = useState<Date>(new Date()); // The first day of the month that is currently displayed
-  let [value, setValue] = useState<Date | null>(null); // The currently selected date
+export function useCalendarState(props: CalendarProps) {
+  let initialMonth = props.defaultValue || new Date();
+  let [currentMonth, setCurrentMonth] = useState<Date>(initialMonth); // The first day of the month that is currently displayed
+  let [value, setValue] = useState<Date | null>(props.defaultValue ?? null); // The currently selected date
   let [focusedDate, _setFocusedDate] = useState<Date | null>(null); // The date that currently has focus
-  let [internalFocus, setInternalFocus] = useState<Date>(new Date());
+  let [internalFocus, setInternalFocus] = useState<Date>(initialMonth);
   let weeks = weeksInMonth(currentMonth);
 
   function setFocusedDate(
@@ -134,6 +136,8 @@ export function useCalendarState() {
 
   function _setValue(date: Date | null) {
     setValue(date);
+
+    if (props.onChange) props.onChange(date);
 
     if (date) announce(`Selected: ${toAriaLabel(date)}`, "polite", 4000);
   }

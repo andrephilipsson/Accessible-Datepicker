@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Calendar } from "./Calendar";
+import DatePicker from "./ComboBox/datepicker";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Calendar />
+    <DatePicker />
   </StrictMode>,
 );

@@ -1,3 +1,11 @@
+export function isValidDate(date: string): boolean {
+  return !isNaN(Date.parse(date));
+}
+
+export function toDateString(date: Date): string {
+  return date.toISOString().split("T")[0];
+}
+
 export function startOfMonth(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), 1);
 }

@@ -3,9 +3,10 @@ import { isSameMonth, isToday } from "../date";
 import { CalendarState, useCalendarState } from "./state";
 import "./styles.css";
 import { toAriaLabel } from "./utils";
+import { CalendarProps } from "./types";
 
-export function Calendar() {
-  let state = useCalendarState();
+export function Calendar(props: CalendarProps) {
+  let state = useCalendarState(props);
 
   return (
     <>
@@ -96,7 +97,7 @@ export function Calendar() {
             month: "long",
             year: "numeric",
           })}
-          tabIndex={-1} // TODO: Makes react listen to key events. But does it hurt accessibility?
+          tabIndex={-1}
           onKeyDown={state.handleKeys}
           className="calendar-Table"
         >
