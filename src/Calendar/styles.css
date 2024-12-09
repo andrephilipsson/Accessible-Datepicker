@@ -70,7 +70,11 @@
     box-shadow:
         0 0 0 2px var(--white),
         0 0 0 4px var(--blue-500);
-    background-color: white;
+    background-color: var(--white);
+}
+
+.calendar-Day[data-focused="true"]:hover {
+    background-color: var(--zinc-200);
 }
 
 .calendar-Day[data-focused="true"] span {
@@ -82,8 +86,15 @@
     color: var(--white);
 }
 
-.calendar-Day[data-selected="false"][data-today="true"] {
-    background-color: var(--zinc-300);
+.calendar-Day[data-selected="false"][data-today="true"][data-focused="false"] {
+    box-shadow:
+        0 0 0 2px var(--white),
+        0 0 0 4px var(--zinc-300);
+    background-color: var(--white);
+}
+
+.calendar-Day[data-selected="false"][data-today="true"][data-focused="false"]:hover {
+    background-color: var(--zinc-200);
 }
 
 .calendar-NavigationButton {
