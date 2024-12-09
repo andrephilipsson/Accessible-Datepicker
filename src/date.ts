@@ -3,7 +3,7 @@ export function isValidDate(date: string): boolean {
 }
 
 export function toDateString(date: Date): string {
-  return date.toISOString().split("T")[0];
+  return new Intl.DateTimeFormat("sv-SE").format(date);
 }
 
 export function startOfMonth(date: Date): Date {
