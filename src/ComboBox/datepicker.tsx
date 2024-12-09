@@ -1,5 +1,5 @@
 // skicka med onSelect = date som props till Calendar
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 import { isValidDate, toDateString } from "../date";
 import { useOutsideClick } from "./state";
@@ -7,6 +7,7 @@ import { useOutsideClick } from "./state";
 export default function DatePicker() {
   const [isOpen, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const enterRef = useRef(false);
   const [date, _setDate] = useState<Date | null>(new Date());
   const [value, setValue] = useState("");
   const { popupRef, buttonRef } = useOutsideClick(() => setOpen(false));
@@ -25,8 +26,14 @@ export default function DatePicker() {
         setOpen(!errorMessage ? true : false);
         break;
       case "Escape":
+        e.preventDefault();
+        e.stopPropagation();
         setValue("");
         _setDate(null);
+        break;
+      case "Enter":
+        enterRef.current = true;
+        break;
     }
   }
 
@@ -39,7 +46,7 @@ export default function DatePicker() {
     setValue(input);
 
     if (!isValidDate(input)) {
-      setErrorMessage("Date must be in the format yyyy-mm-dd.");
+      if (enterRef.current) setErrorMessage("Date must be in the format yyyy-mm-dd.");
       return;
     }
 
@@ -80,6 +87,7 @@ export default function DatePicker() {
           <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7v-5z" />
         </svg>
       </button>
+      {errorMessage && <div className="error"> {errorMessage} </div>}
       {isOpen && (
         <div
           ref={popupRef}

@@ -255,6 +255,11 @@ export function useCalendarState(props: CalendarProps) {
           e.stopPropagation();
           _setValue(focusedDate);
           break;
+        case "Escape":
+          e.preventDefault();
+          e.stopPropagation();
+          props.onChange(value);
+          break;
       }
     },
   };
