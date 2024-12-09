@@ -9,7 +9,7 @@ export default function DatePicker() {
   const [errorMessage, setErrorMessage] = useState("");
   const [date, _setDate] = useState<Date | null>(new Date());
   const [value, setValue] = useState("");
-  const popupRef = useOutsideClick(() => setOpen(false));
+  const { popupRef, buttonRef } = useOutsideClick(() => setOpen(false));
 
   function setDateInCalendar(date: Date | null) {
     _setDate(date);
@@ -61,6 +61,7 @@ export default function DatePicker() {
         style={{ width: "250px", padding: "6px", fontSize: "16px" }}
       />
       <button
+        ref={buttonRef}
         type="button"
         onClick={toggleCalendar}
         aria-label="Toggle calendar"
