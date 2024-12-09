@@ -62,7 +62,7 @@
     border-radius: 50%;
 }
 
-.calendar-Day:hover {
+.calendar-Day[data-hovered="true"] {
     background-color: var(--zinc-200);
 }
 
@@ -73,7 +73,7 @@
     background-color: var(--white);
 }
 
-.calendar-Day[data-focused="true"]:hover {
+.calendar-Day[data-focused="true"][data-hovered="true"][data-selected="false"] {
     background-color: var(--zinc-200);
 }
 
@@ -93,7 +93,7 @@
     background-color: var(--white);
 }
 
-.calendar-Day[data-selected="false"][data-today="true"][data-focused="false"]:hover {
+.calendar-Day[data-selected="false"][data-today="true"][data-hovered="true"] {
     background-color: var(--zinc-200);
 }
 
@@ -107,7 +107,7 @@
     border: none;
 }
 
-.calendar-NavigationButton:hover {
+.calendar-NavigationButton[data-hovered="true"] {
     background-color: var(--zinc-200);
     border-radius: 4px;
 }

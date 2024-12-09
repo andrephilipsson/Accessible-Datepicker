@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isSameMonth, isToday } from "../date";
 import { CalendarState, useCalendarState } from "./state";
 import "./styles.css";
@@ -107,7 +107,7 @@ export function Calendar(props: CalendarProps) {
                 <th key={idx} className="calendar-Weekday">
                   <span>
                     {day.toLocaleString(undefined, {
-                      weekday: "narrow",
+                      weekday: "short",
                     })}
                   </span>
                 </th>
@@ -144,6 +144,7 @@ export function Calendar(props: CalendarProps) {
 function DayCell({ state, day }: { state: CalendarState; day: Date }) {
   let ref = useRef<HTMLSpanElement>(null);
   let isFocused = state.isFocused(day);
+  let [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     if (isFocused && ref.current) {
@@ -165,12 +166,21 @@ function DayCell({ state, day }: { state: CalendarState; day: Date }) {
       data-selected={state.isSelected(day)}
       aria-selected={state.isSelected(day)}
       data-today={isToday(day)}
+      data-hovered={hovered}
+      onPointerEnter={(event) => {
+        if (event.pointerType !== "touch") {
+          setHovered(true);
+        }
+      }}
+      onPointerLeave={() => setHovered(false)}
     >
       <span
         ref={ref}
         role="button"
         aria-label={
-          toAriaLabel(day) + (state.isSelected(day) ? " selected" : "")
+          (isToday(day) ? "Today, " : "") +
+          toAriaLabel(day) +
+          (state.isSelected(day) ? " selected" : "")
         }
         tabIndex={state.dateTabIndex(day)}
         onContextMenu={(event) => event.preventDefault()}
