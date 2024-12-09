@@ -13,7 +13,7 @@ import {
   sameDayInPreviousMonth,
   startOfMonth,
   weeksInMonth,
-} from "./date";
+} from "../date";
 import { toAriaLabel } from "./utils";
 
 export function useCalendarState() {

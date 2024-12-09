@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { isSameMonth, isToday } from "./date";
+import { isSameMonth, isToday } from "../date";
 import { CalendarState, useCalendarState } from "./state";
 import "./styles.css";
 import { toAriaLabel } from "./utils";
