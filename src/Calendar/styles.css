@@ -82,7 +82,7 @@
     color: var(--white);
 }
 
-.calendar-Day[data-today="true"] {
+.calendar-Day[data-selected="false"][data-today="true"] {
     background-color: var(--zinc-300);
 }
 

@@ -18,7 +18,7 @@ export default function DatePicker() {
   }
 
   function handleKeyPress(e: React.KeyboardEvent) {
-    if (e.key === "Enter") {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
       e.stopPropagation();
       //onDateSelect(date);

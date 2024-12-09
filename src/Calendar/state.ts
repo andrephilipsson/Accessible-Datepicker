@@ -21,7 +21,9 @@ export function useCalendarState(props: CalendarProps) {
   let initialMonth = props.defaultValue || new Date();
   let [currentMonth, setCurrentMonth] = useState<Date>(initialMonth); // The first day of the month that is currently displayed
   let [value, setValue] = useState<Date | null>(props.defaultValue ?? null); // The currently selected date
-  let [focusedDate, _setFocusedDate] = useState<Date | null>(null); // The date that currently has focus
+  let [focusedDate, _setFocusedDate] = useState<Date | null>(
+    props.defaultValue,
+  ); // The date that currently has focus
   let [internalFocus, setInternalFocus] = useState<Date>(initialMonth);
   let weeks = weeksInMonth(currentMonth);
 
