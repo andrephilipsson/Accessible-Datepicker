@@ -1,8 +1,8 @@
 // skicka med onSelect = date som props till Calendar
 import { useState } from "react";
 import { Calendar } from "../Calendar";
-import { useOutsideClick } from "./state";
 import { isValidDate, toDateString } from "../date";
+import { useOutsideClick } from "./state";
 
 export default function DatePicker() {
   const [isOpen, setOpen] = useState(false);
@@ -11,18 +11,22 @@ export default function DatePicker() {
   const [value, setValue] = useState("");
   const popupRef = useOutsideClick(() => setOpen(false));
 
-  function setDate(date: Date | null) {
+  function setDateInCalendar(date: Date | null) {
     _setDate(date);
     setValue(date ? toDateString(date) : "");
     setOpen(false);
   }
 
   function handleKeyPress(e: React.KeyboardEvent) {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      e.stopPropagation();
-      //onDateSelect(date);
-      setOpen(true);
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(!errorMessage ? true : false);
+        break;
+      case "Escape":
+        setValue("");
+        _setDate(null);
     }
   }
 
@@ -40,6 +44,7 @@ export default function DatePicker() {
     }
 
     _setDate(new Date(input));
+    setErrorMessage("");
   }
 
   return (
@@ -85,7 +90,7 @@ export default function DatePicker() {
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
           }}
         >
-          <Calendar onChange={setDate} defaultValue={date} />
+          <Calendar onChange={setDateInCalendar} defaultValue={date} />
         </div>
       )}
     </>
