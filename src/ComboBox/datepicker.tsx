@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Calendar } from "../Calendar";
+import { Calendar } from "../calendar";
 import { isValidDate, toDateString } from "../date";
 import { handlePopup } from "./state";
 import "./styles.css";
