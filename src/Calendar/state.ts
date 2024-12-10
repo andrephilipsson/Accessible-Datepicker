@@ -9,8 +9,6 @@ import {
   previousDay,
   previousMonth,
   previousWeek,
-  sameDayInNextMonth,
-  sameDayInPreviousMonth,
   startOfMonth,
   weeksInMonth,
 } from "../date";
@@ -151,7 +149,7 @@ export function useCalendarState(props: CalendarProps) {
     setInternalFocus,
     navigatePreviousMonth() {
       setCurrentMonth((month) => previousMonth(month));
-      setInternalFocus((date) => sameDayInPreviousMonth(date));
+      setInternalFocus((date) => previousMonth(date));
 
       announce(
         new Intl.DateTimeFormat(undefined, {
@@ -163,7 +161,7 @@ export function useCalendarState(props: CalendarProps) {
     },
     navigateNextMonth() {
       setCurrentMonth((month) => nextMonth(month));
-      setInternalFocus((date) => sameDayInNextMonth(date));
+      setInternalFocus((date) => nextMonth(date));
 
       announce(
         new Intl.DateTimeFormat(undefined, {
@@ -229,15 +227,13 @@ export function useCalendarState(props: CalendarProps) {
           e.preventDefault();
           e.stopPropagation();
           setCurrentMonth((month) => previousMonth(month));
-          setFocusedDate((date) =>
-            sameDayInPreviousMonth(date || currentMonth),
-          );
+          setFocusedDate((date) => previousMonth(date || currentMonth));
           break;
         case "PageDown":
           e.preventDefault();
           e.stopPropagation();
           setCurrentMonth((month) => nextMonth(month));
-          setFocusedDate((date) => sameDayInNextMonth(date || currentMonth));
+          setFocusedDate((date) => nextMonth(date || currentMonth));
           break;
         case "Home":
           e.preventDefault();

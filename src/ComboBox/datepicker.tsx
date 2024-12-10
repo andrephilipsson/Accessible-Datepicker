@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 import { isValidDate, toDateString } from "../date";
 import { useOutsideClick } from "./state";
+import "./styles.css";
 
 export default function DatePicker() {
   const [isOpen, setOpen] = useState(false);
@@ -46,7 +47,8 @@ export default function DatePicker() {
     setValue(input);
 
     if (!isValidDate(input)) {
-      if (enterRef.current) setErrorMessage("Date must be in the format yyyy-mm-dd.");
+      if (enterRef.current)
+        setErrorMessage("Date must be in the format yyyy-mm-dd.");
       return;
     }
 
