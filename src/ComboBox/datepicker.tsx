@@ -48,7 +48,7 @@ export default function DatePicker() {
 
     if (!isValidDate(input)) {
       if (enterRef.current)
-        setErrorMessage("Date must be in the format yyyy-mm-dd.");
+        setErrorMessage("Datum måste vara i formatet åååå-mm-dd.");
       return;
     }
 
@@ -58,6 +58,7 @@ export default function DatePicker() {
 
   return (
     <>
+      <h1>Välj ett datum</h1>
       <input
         type="text"
         value={value}
@@ -67,28 +68,27 @@ export default function DatePicker() {
         aria-haspopup="true"
         aria-expanded={isOpen}
         aria-invalid={!!errorMessage}
-        style={{ width: "250px", padding: "6px", fontSize: "16px" }}
+        className={errorMessage ? "input-error" : "input-normal"}
       />
       <button
         ref={buttonRef}
         type="button"
         onClick={toggleCalendar}
-        aria-label="Toggle calendar"
-        style={{
-          background: "none",
-          border: "none",
-          padding: "0",
-        }}
+        className="toggle-button"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="22"
+          aria-label="Toggle calendar"
+          width="32"
           height="22"
-          role="image"
+          focusable="false"
+          role="img"
         >
-          <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7v-5z" />
+          <path
+            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7v-5z" />
         </svg>
       </button>
+
       {errorMessage && <div className="error"> {errorMessage} </div>}
       {isOpen && (
         <div
@@ -96,10 +96,6 @@ export default function DatePicker() {
           className="calendar-popup"
           role="dialog"
           aria-label="Select a date"
-          style={{
-            border: "1px solid #ccc",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-          }}
         >
           <Calendar onChange={setDateInCalendar} defaultValue={date} />
         </div>

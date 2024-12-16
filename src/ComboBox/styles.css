@@ -1,0 +1,46 @@
+.input-normal {
+    width: 250px;
+    height: 20px;
+    padding: 6px;
+    font-size: 16px;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #1d4ed8;
+    border-radius: 15px;
+}
+
+.input-error {
+    width: 250px;
+    height: 20px;
+    padding: 6px;
+    font-size: 16px;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red;
+    border-radius: 15px;
+}
+
+.toggle-button {
+    width: 32px;
+    height: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.calendar-popup {
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* .heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 2rem;
+    font-weight: var(--font-medium);
+} */
