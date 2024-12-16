@@ -1,8 +1,7 @@
-// skicka med onSelect = date som props till Calendar
 import { useRef, useState } from "react";
 import { Calendar } from "../Calendar";
 import { isValidDate, toDateString } from "../date";
-import { useOutsideClick } from "./state";
+import { handlePopup } from "./state";
 import "./styles.css";
 
 export default function DatePicker() {
@@ -11,7 +10,7 @@ export default function DatePicker() {
   const enterRef = useRef(false);
   const [date, _setDate] = useState<Date | null>(new Date());
   const [value, setValue] = useState("");
-  const { popupRef, buttonRef } = useOutsideClick(() => setOpen(false));
+  const { popupRef, buttonRef } = handlePopup(() => setOpen(false));
 
   function setDateInCalendar(date: Date | null) {
     _setDate(date);

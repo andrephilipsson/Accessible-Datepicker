@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const useOutsideClick = (callback: () => void) => {
+export const handlePopup = (callback: () => void) => {
   const popupRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -21,9 +21,37 @@ export const useOutsideClick = (callback: () => void) => {
       }
     };
 
+    const handleKeys = (e: KeyboardEvent) => {
+      if (popupRef.current) {
+        const focusableElems = Array.from(
+          popupRef.current.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          )) as HTMLElement[];
+        const first = focusableElems[0];
+        const last = focusableElems[focusableElems.length - 1];
+
+        switch (e.key) {
+          case "Tab":
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+            break;
+          case "Escape":
+            callback();
+            break;
+        }
+      }
+    };
+
+    popupRef.current?.addEventListener("keydown", handleKeys);
     document.addEventListener("mouseup", handleClickOutside);
 
     return () => {
+      popupRef.current?.removeEventListener("keydown", handleKeys);
       document.removeEventListener("mouseup", handleClickOutside);
     };
   }, [callback]);
