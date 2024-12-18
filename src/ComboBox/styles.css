@@ -1,6 +1,7 @@
 .input-group {
     position: relative;
     width: fit-content;
+    padding-top: 4px;
 }
 
 .input-normal {
@@ -11,18 +12,18 @@
     text-align: left;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
+    border: 1px solid var(--zinc-400);
     border-radius: 6px;
-}
 
-.input-description {
-    font-size: 0.8rem;
+    &::placeholder {
+        color: var(--zinc-400);
+    }
 }
 
 .input-label {
     font-weight: var(--font-medium);
     font-size: 0.8rem;
-    margin-bottom: 8px;
+    color: var(--zinc-700);
 }
 
 .input-error {
@@ -46,13 +47,14 @@
     position: absolute;
     right: 4px;
     top: 50%;
-    transform: translateY(-60%);
+    transform: translateY(-50%);
+    color: var(--zinc-800)
 }
 
 .calendar-popup {
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: fit-content;
+    width: fit-content(95%)
     padding: 8px;
     border-radius: 6px;
     position: absolute;

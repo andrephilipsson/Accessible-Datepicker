@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
-import { Calendar } from "../calendar";
+import Calendar from "../calendar";
 import { isValidDate, toDateString } from "../date";
 import { handlePopup } from "./state";
 import "./styles.css";
 import { VisuallyHidden } from "../VisuallyHidden";
+import { AriaLiveProvider } from "../live/aria-live";
 
 export default function DatePicker() {
   const [isOpen, setOpen] = useState(false);
@@ -64,7 +65,7 @@ export default function DatePicker() {
   }
 
   return (
-    <>
+    <AriaLiveProvider>
       <label htmlFor="date-input" className="input-label">
         Välj ett datum
         <VisuallyHidden>
@@ -137,6 +138,6 @@ export default function DatePicker() {
           <Calendar onChange={setDateInCalendar} defaultValue={date} />
         </div>
       )}
-    </>
+    </AriaLiveProvider>
   );
 }

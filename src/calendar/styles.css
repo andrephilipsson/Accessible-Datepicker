@@ -50,50 +50,50 @@
     font-weight: var(--font-medium);
 }
 
-.calendar-Weekday {
+.accessible-calendar-WeekDay {
     font-size: 0.8rem;
     font-weight: var(--font-bold);
 }
 
-.calendar-Day {
-    width: 32px;
+.accessible-calendar-Day {
+    min-width: 32px;
     height: 32px;
     text-align: center;
     border-radius: 50%;
 }
 
-.calendar-Day[data-hovered="true"] {
+.accessible-calendar-Day[data-hovered="true"] {
     background-color: var(--zinc-200);
 }
 
-.calendar-Day[data-focused="true"] {
+.accessible-calendar-Day[data-focused="true"] {
     box-shadow:
         0 0 0 2px var(--white),
         0 0 0 4px var(--blue-500);
     background-color: var(--white);
 }
 
-.calendar-Day[data-focused="true"][data-hovered="true"][data-selected="false"] {
+.accessible-calendar-Day[data-focused="true"][data-hovered="true"][data-selected="false"] {
     background-color: var(--zinc-200);
 }
 
-.calendar-Day[data-focused="true"] span {
+.accessible-calendar-Day[data-focused="true"] span {
     outline: none;
 }
 
-.calendar-Day[data-selected="true"] {
+.accessible-calendar-Day[data-selected="true"] {
     background-color: var(--blue-700);
     color: var(--white);
 }
 
-.calendar-Day[data-selected="false"][data-today="true"][data-focused="false"] {
+.accessible-calendar-Day[data-selected="false"][data-today="true"][data-focused="false"] {
     box-shadow:
         0 0 0 2px var(--white),
         0 0 0 4px var(--zinc-300);
     background-color: var(--white);
 }
 
-.calendar-Day[data-selected="false"][data-today="true"][data-hovered="true"] {
+.accessible-calendar-Day[data-selected="false"][data-today="true"][data-hovered="true"] {
     background-color: var(--zinc-200);
 }
 
@@ -115,17 +115,4 @@
 .calendar-NavigationButton svg {
     width: 24px;
     height: 24px;
-}
-
-.calendar-Hidden {
-    border: 0px;
-    clip: rect(0px, 0px, 0px, 0px);
-    clip-path: inset(50%);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0px;
-    position: absolute;
-    width: 1px;
-    white-space: nowrap;
 }

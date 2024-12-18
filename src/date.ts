@@ -1,3 +1,5 @@
+import { DEFAULT_LOCALE } from "./locale";
+
 /**
  * Creates a Date object from a string in the format "YYYY-MM-DD".
  * If the string is not a valid date or is not in the correct format, returns `false`.
@@ -27,7 +29,7 @@ export function isValidDate(date: string): boolean {
  * @returns {boolean} `true` if the date string is valid, `false` otherwise.
  */
 export function toDateString(date: Date): string {
-  return new Intl.DateTimeFormat("sv-SE").format(date); // TODO: Make this locale-aware
+  return new Intl.DateTimeFormat(DEFAULT_LOCALE).format(date); // TODO: Make this locale-aware
 }
 
 /**

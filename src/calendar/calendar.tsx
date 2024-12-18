@@ -1,45 +1,32 @@
-import { useEffect, useRef, useState } from "react";
-import { isSameMonth, isToday } from "../date";
-import { CalendarState, useCalendarState } from "./state";
+import { useCalendarState } from "./state";
 import "./styles.css";
-import { toAriaLabel } from "./utils";
 import { CalendarProps } from "./types";
+import { CalendarWeek } from "./week/CalendarWeek";
+import { CalendarWeekDay } from "./week-day/CalendarWeekDay";
+import { VisuallyHidden } from "../VisuallyHidden";
+import { DEFAULT_LOCALE } from "../locale";
+import { capitalize } from "./utils";
 
 export function Calendar(props: CalendarProps) {
   let state = useCalendarState(props);
 
   return (
     <>
-      <div data-live-announcer="true" className="calendar-Hidden">
-        <div
-          id="live-assertive"
-          role="log"
-          aria-live="assertive"
-          aria-relevant="additions"
-        ></div>
-        <div
-          id="live-polite"
-          role="log"
-          aria-live="polite"
-          aria-relevant="additions"
-        ></div>
-      </div>
-
       <div
-        aria-label={`Calendar, ${state.current.toLocaleString("default", {
+        aria-label={`Calendar, ${state.current.toLocaleString(DEFAULT_LOCALE, {
           month: "long",
           year: "numeric",
         })}`}
         role="application"
       >
-        <div className="calendar-Hidden">
+        {/* <VisuallyHidden>
           <h2>
-            {`Calendar, ${state.current.toLocaleString("default", {
+            {`Calendar, ${state.current.toLocaleString(DEFAULT_LOCALE, {
               month: "long",
               year: "numeric",
             })}`}
           </h2>
-        </div>
+        </VisuallyHidden> */}
         <div className="calendar-Heading">
           <button
             onClick={state.navigatePreviousMonth}
@@ -63,10 +50,12 @@ export function Calendar(props: CalendarProps) {
             </svg>
           </button>
           <h2 aria-hidden="true">
-            {state.current.toLocaleString("default", {
-              month: "long",
-              year: "numeric",
-            })}
+            {capitalize(
+              state.current.toLocaleString(DEFAULT_LOCALE, {
+                month: "long",
+                year: "numeric",
+              }),
+            )}
           </h2>
           <button
             onClick={state.navigateNextMonth}
@@ -93,7 +82,7 @@ export function Calendar(props: CalendarProps) {
 
         <table
           role="grid"
-          aria-label={state.current.toLocaleString("default", {
+          aria-label={state.current.toLocaleString(DEFAULT_LOCALE, {
             month: "long",
             year: "numeric",
           })}
@@ -104,27 +93,13 @@ export function Calendar(props: CalendarProps) {
           <thead aria-hidden="true">
             <tr>
               {state.weeks[0].map((day, idx) => (
-                <th key={idx} className="calendar-Weekday">
-                  <span>
-                    {day.toLocaleString(undefined, {
-                      weekday: "short",
-                    })}
-                  </span>
-                </th>
+                <CalendarWeekDay key={idx} day={day} />
               ))}
             </tr>
           </thead>
           <tbody onBlur={() => state.setFocusedDate(null)}>
             {state.weeks.map((week, idx) => (
-              <tr key={idx}>
-                {week.map((day) =>
-                  isSameMonth(state.current, day) ? (
-                    <DayCell state={state} day={day} key={day.toString()} />
-                  ) : (
-                    <td key={day.toString()} />
-                  ),
-                )}
-              </tr>
+              <CalendarWeek key={idx} state={state} week={week} />
             ))}
           </tbody>
         </table>
@@ -138,55 +113,5 @@ export function Calendar(props: CalendarProps) {
         </div> */}
       </div>
     </>
-  );
-}
-
-function DayCell({ state, day }: { state: CalendarState; day: Date }) {
-  let ref = useRef<HTMLSpanElement>(null);
-  let isFocused = state.isFocused(day);
-  let [hovered, setHovered] = useState(false);
-
-  useEffect(() => {
-    if (isFocused && ref.current) {
-      ref.current.focus();
-    }
-  }, [isFocused, ref]);
-
-  return (
-    <td
-      role="gridcell"
-      className="calendar-Day"
-      key={day.toString()}
-      onClick={() => {
-        state.setInternalFocus(day);
-        state.setValue(day);
-      }}
-      onFocus={() => state.setFocusedDate(day)}
-      data-focused={state.isFocused(day)}
-      data-selected={state.isSelected(day)}
-      aria-selected={state.isSelected(day)}
-      data-today={isToday(day)}
-      data-hovered={hovered}
-      onPointerEnter={(event) => {
-        if (event.pointerType !== "touch") {
-          setHovered(true);
-        }
-      }}
-      onPointerLeave={() => setHovered(false)}
-    >
-      <span
-        ref={ref}
-        role="button"
-        aria-label={
-          (isToday(day) ? "Today, " : "") +
-          toAriaLabel(day) +
-          (state.isSelected(day) ? " selected" : "")
-        }
-        tabIndex={state.dateTabIndex(day)}
-        onContextMenu={(event) => event.preventDefault()}
-      >
-        {day.getDate()}
-      </span>
-    </td>
   );
 }

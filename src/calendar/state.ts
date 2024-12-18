@@ -14,8 +14,11 @@ import {
 } from "../date";
 import { toAriaLabel } from "./utils";
 import { CalendarProps } from "./types";
+import { useAriaLive } from "../live/aria-live";
+import { DEFAULT_LOCALE } from "../locale";
 
 export function useCalendarState(props: CalendarProps) {
+  let { announce } = useAriaLive();
   let initialMonth = props.defaultValue || new Date();
   let [currentMonth, setCurrentMonth] = useState<Date>(initialMonth); // The first day of the month that is currently displayed
   let [value, setValue] = useState<Date | null>(props.defaultValue ?? null); // The currently selected date
@@ -38,24 +41,6 @@ export function useCalendarState(props: CalendarProps) {
     }
     _setFocusedDate(date);
     if (date) setInternalFocus(date);
-  }
-
-  function announce(
-    message: string,
-    ariaLive: "assertive" | "polite" = "polite",
-    timeout: number = 7000,
-  ) {
-    let liveMessage = document.getElementById(
-      `live-${ariaLive}`,
-    ) as HTMLDivElement;
-
-    let node = document.createElement("div");
-    node.textContent = message;
-    liveMessage.appendChild(node);
-
-    setTimeout(() => {
-      liveMessage.removeChild(node);
-    }, timeout);
   }
 
   function focusPreviousDay() {
@@ -139,7 +124,11 @@ export function useCalendarState(props: CalendarProps) {
 
     if (props.onChange) props.onChange(date);
 
-    if (date) announce(`Selected: ${toAriaLabel(date)}`, "polite", 4000);
+    if (date)
+      announce(`Selected: ${toAriaLabel(date)}`, {
+        live: "polite",
+        timeout: 4000,
+      });
   }
 
   return {
@@ -152,11 +141,13 @@ export function useCalendarState(props: CalendarProps) {
       setInternalFocus((date) => previousMonth(date));
 
       announce(
-        new Intl.DateTimeFormat(undefined, {
+        new Intl.DateTimeFormat(DEFAULT_LOCALE, {
           month: "long",
           year: "numeric",
         }).format(previousMonth(currentMonth)),
-        "assertive",
+        {
+          live: "assertive",
+        },
       );
     },
     navigateNextMonth() {
@@ -164,11 +155,11 @@ export function useCalendarState(props: CalendarProps) {
       setInternalFocus((date) => nextMonth(date));
 
       announce(
-        new Intl.DateTimeFormat(undefined, {
+        new Intl.DateTimeFormat(DEFAULT_LOCALE, {
           month: "long",
           year: "numeric",
         }).format(nextMonth(currentMonth)),
-        "assertive",
+        { live: "assertive" },
       );
     },
     isSelected(date: Date) {
