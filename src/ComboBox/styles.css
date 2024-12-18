@@ -1,3 +1,8 @@
+.input-group {
+    position: relative;
+    width: fit-content;
+}
+
 .input-normal {
     width: 250px;
     height: 20px;
@@ -6,8 +11,18 @@
     text-align: left;
     align-items: center;
     justify-content: center;
-    border: 2px solid #1d4ed8;
-    border-radius: 15px;
+    border: 2px solid black;
+    border-radius: 6px;
+}
+
+.input-description {
+    font-size: 0.8rem;
+}
+
+.input-label {
+    font-weight: var(--font-medium);
+    font-size: 0.8rem;
+    margin-bottom: 8px;
 }
 
 .input-error {
@@ -19,7 +34,7 @@
     align-items: center;
     justify-content: center;
     border: 2px solid red;
-    border-radius: 15px;
+    border-radius: 6px;
 }
 
 .toggle-button {
@@ -28,11 +43,21 @@
     background: none;
     border: none;
     padding: 0;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-60%);
 }
 
 .calendar-popup {
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    padding: 8px;
+    border-radius: 6px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
 }
 
 /* .heading {

@@ -25,8 +25,9 @@ export const handlePopup = (callback: () => void) => {
       if (popupRef.current) {
         const focusableElems = Array.from(
           popupRef.current.querySelectorAll(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-          )) as HTMLElement[];
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          ),
+        ) as HTMLElement[];
         const first = focusableElems[0];
         const last = focusableElems[focusableElems.length - 1];
 
@@ -42,6 +43,7 @@ export const handlePopup = (callback: () => void) => {
             break;
           case "Escape":
             callback();
+            buttonRef.current?.focus();
             break;
         }
       }

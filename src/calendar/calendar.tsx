@@ -129,13 +129,13 @@ export function Calendar(props: CalendarProps) {
           </tbody>
         </table>
 
-        <div className="calendar-Hidden">
+        {/* <div className="calendar-Hidden">
           <button
             aria-label="Next month"
             tabIndex={-1}
             onClick={state.navigateNextMonth}
           ></button>
-        </div>
+        </div> */}
       </div>
     </>
   );
