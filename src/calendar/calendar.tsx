@@ -6,7 +6,6 @@ import { CalendarWeekDay } from "./week-day/CalendarWeekDay";
 import { VisuallyHidden } from "../VisuallyHidden";
 import { DEFAULT_LOCALE } from "../locale";
 import { capitalize } from "./utils";
-import { AriaLiveProvider } from "../live/aria-live";
 
 export function Calendar(props: CalendarProps) {
   let state = useCalendarState(props);
