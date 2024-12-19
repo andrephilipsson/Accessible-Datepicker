@@ -4,7 +4,6 @@ import { isValidDate, toDateString } from "../date";
 import { handlePopup } from "./state";
 import "./styles.css";
 import { VisuallyHidden } from "../VisuallyHidden";
-import { AriaLiveProvider } from "../live/aria-live";
 
 export default function DatePicker() {
   const [isOpen, setOpen] = useState(false);
@@ -65,7 +64,7 @@ export default function DatePicker() {
   }
 
   return (
-    <AriaLiveProvider>
+    <>
       <label htmlFor="date-input" className="input-label">
         Välj ett datum
         <VisuallyHidden>
@@ -135,9 +134,11 @@ export default function DatePicker() {
           aria-modal="true"
           aria-label="Välj ett datum i kalendern"
         >
-          <Calendar onChange={setDateInCalendar} defaultValue={date} />
+          <div onClick={(e) => e.stopPropagation()}>
+            <Calendar onChange={setDateInCalendar} defaultValue={date} />
+          </div>
         </div>
       )}
-    </AriaLiveProvider>
+    </>
   );
 }

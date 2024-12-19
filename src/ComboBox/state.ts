@@ -6,7 +6,6 @@ export const handlePopup = (callback: () => void) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      // Don't trigger the callback if clicking the toggle button
       if (
         buttonRef.current &&
         buttonRef.current.contains(event.target as Node)

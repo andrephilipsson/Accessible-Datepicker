@@ -49,9 +49,9 @@ export function CalendarDay(props: CalendarDayProps) {
         ref={ref}
         role="button"
         aria-label={
-          (isToday(day) ? "Today, " : "") +
+          (isToday(day) ? "Idag, " : "") +
           toAriaLabel(day) +
-          (state.isSelected(day) ? " selected" : "")
+          (state.isSelected(day) ? " vald" : "")
         }
         tabIndex={state.dateTabIndex(day)}
         onContextMenu={(event) => event.preventDefault()}

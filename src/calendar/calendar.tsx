@@ -6,6 +6,7 @@ import { CalendarWeekDay } from "./week-day/CalendarWeekDay";
 import { VisuallyHidden } from "../VisuallyHidden";
 import { DEFAULT_LOCALE } from "../locale";
 import { capitalize } from "./utils";
+import { AriaLiveProvider } from "../live/aria-live";
 
 export function Calendar(props: CalendarProps) {
   let state = useCalendarState(props);
@@ -13,20 +14,20 @@ export function Calendar(props: CalendarProps) {
   return (
     <>
       <div
-        aria-label={`Calendar, ${state.current.toLocaleString(DEFAULT_LOCALE, {
+        aria-label={`Kalender, ${state.current.toLocaleString(DEFAULT_LOCALE, {
           month: "long",
           year: "numeric",
         })}`}
         role="application"
       >
-        {/* <VisuallyHidden>
+        <VisuallyHidden>
           <h2>
-            {`Calendar, ${state.current.toLocaleString(DEFAULT_LOCALE, {
+            {`Kalender, ${state.current.toLocaleString(DEFAULT_LOCALE, {
               month: "long",
               year: "numeric",
             })}`}
           </h2>
-        </VisuallyHidden> */}
+        </VisuallyHidden>
         <div className="calendar-Heading">
           <button
             onClick={state.navigatePreviousMonth}
@@ -38,7 +39,7 @@ export function Calendar(props: CalendarProps) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              aria-label="Previous month" // TODO: Localize
+              aria-label="Föregående månad"
               focusable="false"
               role="img"
             >
@@ -67,7 +68,7 @@ export function Calendar(props: CalendarProps) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              aria-label="Next month" // TODO: Localize
+              aria-label="Nästa månad"
               focusable="false"
               role="img"
             >

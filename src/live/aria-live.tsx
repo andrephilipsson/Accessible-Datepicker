@@ -50,14 +50,12 @@ export function AriaLiveProvider({ children }: React.PropsWithChildren) {
         <div
           id="aria-live-polite"
           aria-live="polite"
-          aria-atomic="true"
           aria-relevant="additions"
           role="log"
         ></div>
         <div
           id="aria-live-assertive"
           aria-live="assertive"
-          aria-atomic="true"
           aria-relevant="additions"
           role="log"
         ></div>
