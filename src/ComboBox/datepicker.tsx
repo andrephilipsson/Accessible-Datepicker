@@ -134,9 +134,7 @@ export default function DatePicker() {
           aria-modal="true"
           aria-label="Välj ett datum i kalendern"
         >
-          <div onClick={(e) => e.stopPropagation()}>
-            <Calendar onChange={setDateInCalendar} defaultValue={date} />
-          </div>
+          <Calendar onChange={setDateInCalendar} defaultValue={date} />
         </div>
       )}
     </>
